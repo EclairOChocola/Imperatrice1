@@ -17,9 +17,9 @@
       <div class="form-group" >
         <select class="form-control" name = "type" onchange="this.form.submit()">
           <option value="bar" selected>Selectionner un paramètre</option >
-          <% for (var i=0 ; i < api2.length ; i++) {
-          var el = api2[i]; %>
-          <option value="<%= el.value %>" ><%= el.value %></option>
+          <% for (var i=0 ; i < api2.genre.length ; i++) {
+          <!-- var g = api2[i]; %> -->
+          <option value="<%= %>" ><%= api2.genre[i] %></option>
           <% } %>
 
         </select >
@@ -27,41 +27,25 @@
     </form>
   </div>
 </div>
+</div>
 
-<div class="row">
-  <div class="table-responsive col-md-10 col-md-offset-1">
-    <table class="table table-striped table-bordered" >
-    	<tr>
-        <th> Jaquette </th>
-    		<th >IMDB<span class="badge"> <%= api1.length %> </span></th>
-    		<th >Titre</th>
-    		<th >Année</th>
-    		<th >Description</th>
-    	</tr>
+  <% for (var i=0 ; i < api1.movies.length ; i++) {
+     var movie = api1.movies[i]; %>
+  <div class="col-md-2">
+    <img src="<%= movie.medium_cover_image %>" class="img-responsive" alt="Responsive image">
+    <dl>
+      <dt> <%= movie.title %> </dt>
+      <dd> <%= movie.year %> </dd>
 
-      <% for (var i=0 ; i < api1.length ; i++) {
-      var el = api1[i]; %>
-      <tr>
-        <td>
-        <img src="<%= el.small_cover_image %>" class="img-responsive" alt="Responsive image">  
-        </td>
-        <td><%= el.imdb_code %></td>
-        <td><%= el.title %></td>
-        <td><%= el.year %></td>
-        <td><%= el.summary %></td>
-      </tr>
+      <% for (var j=0 ; j < movie.torrents.length ; j++) {
+         var torrent = movie.torrents[j]; %>
+         <dd> <a href=" <%= torrent.url %>"><%= torrent.quality %></a> </dd>
       <% } %>
 
-      <% if (api1.length == 0) { %>
-      <tr class="info">
-        <td>Aucun résultat pour votre recherche</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <% } %>
-    </table >
+    </dl>
   </div>
+  <% } %>
+
 
 
 

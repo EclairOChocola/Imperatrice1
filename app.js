@@ -5,6 +5,7 @@ var querystring = require('querystring');
 var express 		= require('express');
 var app 				= express();
 var http 				= require('http');
+var https 			= require('https');
 var server 			= http.createServer();
 var async 			= require('async');
 var request 		= require('request');
@@ -71,26 +72,30 @@ app.get('/APIs', function(req, res) {
 	if(req.query.type) {
 		var valeur = req.query.type;
 	} else {
-		var valeur = "bar";
+		var valeur = "Action";
 	}
-	var url1 = "http://overpass-api.de/api/interpreter?[out:json];(node[amenity="+valeur+"](45.15414,5.677606,45.214077,5.753118););out;";
-	var url2 = "http://taginfo.openstreetmap.org/api/4/key/values?key=amenity&page=1&rp=100&sortname=count_all&sortorder=desc";
+	var url1 = "https://yts.ag/api/v2/list_movies.json?limit=50&genre="+valeur+"";
+	var url2 = "http://remydumas.com/api/genre";
 
 	async.parallel([
 	function(callback) {
 		request(url1, function(err, response, body) {
 			obj = JSON.parse(body);
 			callback(false, obj);
+			//console.log(obj.data);
 		});
 	},
 	function(callback) {
 		request(url2, function(err, response, body) {
 			obj = JSON.parse(body);
+			console.log(obj);
+
 			callback(false, obj);
 		});
 	},],
 	function(err, results) {
-		res.render('APIs.ejs', {api1:results[0].elements, api2:results[1].data} );
+		console.log(results[1]);
+		res.render('APIs.ejs', {api1:results[0].data, api2:results[1]} );
 	});
 	//res.render('APIs.ejs');
 });

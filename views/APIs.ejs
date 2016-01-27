@@ -1,0 +1,84 @@
+
+<% include ./elem/header.ejs %>
+<h1 class="text-center">APIs <small>Utilisation de deux API</small></h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <form class="form-inline well well-sm col-md-10 col-md-offset-1" action="/APIs" method="get">
+      <span class="glyphicon glyphicon-search" ></span >
+
+      <div class="form-group" >
+        <!-- <input type="text" name="type" class="form-control" id="name"
+               placeholder="restaurant, bat etc..."
+					/>
+          <button class="btn btn-success" type="submit" name="button">Envoyer</button>-->
+      </div>
+
+      <div class="form-group" >
+        <select class="form-control" name = "type" onchange="this.form.submit()">
+          <option value="bar" selected>Selectionner un paramètre</option >
+          <% for (var i=0 ; i < api2.length ; i++) {
+          var el = api2[i]; %>
+          <option value="<%= el.value %>" ><%= el.value %></option>
+          <% } %>
+
+        </select >
+      </div >
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="table-responsive col-md-10 col-md-offset-1">
+    <table class="table table-striped table-bordered" >
+    	<tr>
+    		<th >Nom <span class="badge"> <%= api1.length %> </span></th>
+    		<th >Type</th>
+    		<th >Lat</th>
+    		<th >Lon</th>
+    	</tr>
+
+      <% for (var i=0 ; i < api1.length ; i++) {
+      var el = api1[i]; %>
+      <tr>
+        <td><%= el.tags.name %></td>
+        <td><%= el.lat %></td>
+        <td><%= el.lon %></td>
+        <td><%= el.tags.amenity %></td>
+      </tr>
+      <% } %>
+
+      <% if (api1.length == 0) { %>
+      <tr class="info">
+        <td>Aucun résultat pour votre recherche</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% } %>
+    </table >
+  </div>
+
+
+
+  <!-- <div class="table-responsive col-md-4">
+    <table class="table table-striped table-bordered" >
+    	<tr >
+    		<th >Type </th >
+    		<th >Wiki</th>
+    		<th >Description</th>
+    	</tr >
+
+      <% for (var i=0 ; i < api2.length ; i++) {
+      var el = api2[i]; %>
+      <tr>
+        <td><%= el.value %></td>
+        <td><%= el.in_wiki %></td>
+        <td><%= el.description %></td>
+      </tr>
+      <% } %>
+    </table >
+  </div> -->
+</div>
+
+<% include ./elem/footer.ejs %>

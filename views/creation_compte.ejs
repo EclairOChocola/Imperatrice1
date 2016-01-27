@@ -1,0 +1,117 @@
+<% include ./elem/header.ejs %>
+<div class="row">
+  <div class="col-md-6">
+    <form class="form-horizontal" action="/compte/creation">
+      <fieldset>
+      <!-- Form Name -->
+      <legend>Inscription</legend>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Pseudo</label>
+        <div class="col-md-8">
+          <input id="textinput" name="pseudo" placeholder="Votre pseudo..."
+                class="form-control input-md" type="text" value="pseudo">
+          <span class="help-block"></span>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Adresse mail</label>
+        <div class="col-md-8">
+          <input id="textinput" name="mail" placeholder="add@example.com"
+                 class="form-control input-md" type="text" value="mail">
+          <span class="help-block"></span>
+        </div>
+      </div>
+
+      <!-- Password input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="passwordinput">Mot de passe</label>
+        <div class="col-md-8">
+          <input id="pass" name="pass" placeholder="Votre mot de passe..."
+                 class="form-control input-md" type="password" value="Pass1">
+          <span class="help-block"></span>
+        </div>
+      </div>
+
+      <!-- Password input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="passwordinput">Confirmer</label>
+        <div class="col-md-8">
+          <input id="pass2" name="pass2" placeholder="Confirmation de votre mot de passe..."
+                 class="form-control input-md" type="password" value="pass2">
+          <span class="help-block"></span>
+        </div>
+      </div>
+
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="button1id">&nbsp;</label>
+        <div class="col-md-8">
+          <button id="button1id" type="submit" name="button1id" class="btn btn-success">Inscription</button>
+          <button id="button2id" type="reset" name="button2id" class="btn btn-danger">Annuler</button>
+        </div>
+      </div>
+
+      </fieldset>
+    </form>
+  </div>
+
+
+
+  <div class="col-md-6">
+    <form class="form-horizontal" action="/compte/creation">
+      <fieldset>
+      <!-- Form Name -->
+      <legend>Connexion</legend>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Pseudo</label>
+        <div class="col-md-7">
+          <input id="textinput" name="pseudo" placeholder="Votre pseudo..."
+                class="form-control input-md" type="text">
+          <span class="help-block"></span>
+        </div>
+      </div>
+
+      <!-- Password input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="passwordinput">Mot de passe</label>
+        <div class="col-md-7">
+          <input id="pass" name="pass" placeholder="Votre mot de passe..."
+                 class="form-control input-md" type="password">
+          <span class="help-block"></span>
+        </div>
+      </div>
+
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="button1id">&nbsp;</label>
+        <div class="col-md-7">
+          <button id="button1id" type="submit" name="button1id" class="btn btn-success">Connexion</button>
+          <button id="button2id" type="reset" name="button2id" class="btn btn-danger">Annuler</button>
+        </div>
+      </div>
+
+      </fieldset>
+    </form>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% include ./elem/footer.ejs %>

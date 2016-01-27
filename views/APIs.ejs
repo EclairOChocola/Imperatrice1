@@ -32,19 +32,23 @@
   <div class="table-responsive col-md-10 col-md-offset-1">
     <table class="table table-striped table-bordered" >
     	<tr>
-    		<th >Nom <span class="badge"> <%= api1.length %> </span></th>
-    		<th >Type</th>
-    		<th >Lat</th>
-    		<th >Lon</th>
+        <th> Jaquette </th>
+    		<th >IMDB<span class="badge"> <%= api1.length %> </span></th>
+    		<th >Titre</th>
+    		<th >Année</th>
+    		<th >Description</th>
     	</tr>
 
       <% for (var i=0 ; i < api1.length ; i++) {
       var el = api1[i]; %>
       <tr>
-        <td><%= el.tags.name %></td>
-        <td><%= el.lat %></td>
-        <td><%= el.lon %></td>
-        <td><%= el.tags.amenity %></td>
+        <td>
+        <img src=<%= el.small_cover_image %> class="img-responsive" alt="Responsive image">  
+        </td>
+        <td><%= el.imdb_code %></td>
+        <td><%= el.title %></td>
+        <td><%= el.year %></td>
+        <td><%= el.summary %></td>
       </tr>
       <% } %>
 

@@ -1,5 +1,268 @@
 
 <% include ./elem/header.ejs %>
+
+
+<!-- Page Content -->
+ <div class="container">
+
+   <!-- Page Header -->
+   <div class="row">
+     <div class="col-lg-12">
+       <h1 class="page-header">Downloads à GOGO
+                   <small>Unlimited torrents download</small>
+               </h1>
+     </div>
+   </div>
+   <!-- /.row -->
+
+   <!-- Content Row -->
+   <div class="row">
+
+
+
+     <% if (api1.length != 0) {
+         for (var i=0 ; i < api1.movies.length ; i++) {
+         var movie = api1.movies[i]; %>
+   <div class="col-md-4">
+     <div class="card hoverable">
+       <div class="card-image">
+         <img src="<%= movie.medium_cover_image %>">
+         <span class="card-title"> <%= movie.title %> </span>
+       </div>
+       <div class="card-content">
+         <p> <%= movie.year %> </p>
+         <% for (var j=0 ; j < movie.torrents.length ; j++) {
+            var torrent = movie.torrents[j]; %>
+            <b> <a href=" <%= torrent.url %>"><%= torrent.quality %> </a>  - peers: <%= torrent.peers %> - seeds: <%= torrent.seeds %> </b> <br/>
+         <% } %>
+       </div>
+       <div class="card-action">
+         <a href="http://mdbootstrap.com/product/magic-portfolio-for-video-maker/">
+           <button type="button" class="btn btn-info waves-effect waves-light">Read more</button>
+         </a>
+       </div>
+     </div>
+   </div>
+     <% } %>
+   <% } else { %>
+         <p>
+           Aucun films n'est présent dans cette catégorie
+         </p>
+     <% }  %>
+
+
+
+
+
+
+
+
+
+
+     <!-- /.col-md-4 -->
+     <div class="col-md-4">
+       <div class="card hoverable">
+         <div class="card-image">
+           <img src="img/project2.png">
+           <span class="card-title">Material Design for Bootstrap</span>
+         </div>
+         <div class="card-content">
+           <p>Google designed a Material Design to make a web more beautiful. Twitter created a Bootstrap to support you in faster and easier development of responsive...</p>
+         </div>
+         <div class="card-action">
+           <a href="http://mdbootstrap.com/material-design-for-bootstrap/">
+             <button type="button" class="btn btn-info waves-effect waves-light">Read more</button>
+           </a>
+         </div>
+       </div>
+     </div>
+     <!-- /.col-md-4 -->
+     <div class="col-md-4">
+       <div class="card hoverable">
+         <div class="card-image">
+           <img src="img/project3.png">
+           <span class="card-title">Creative Agency</span>
+         </div>
+         <div class="card-content">
+           <p>Did you know that a strong brand is absolutely essential for generating sales and growth on Social Media? You may not have given a lot...</p>
+         </div>
+         <div class="card-action">
+           <a href="http://mdbootstrap.com/product/magic-portfolio-for-creative-agency">
+             <button type="button" class="btn btn-info waves-effect waves-light">Read more</button>
+           </a>
+         </div>
+       </div>
+     </div>
+     <!-- /.col-md-4 -->
+   </div>
+   <!-- /.row -->
+
+   <!-- Content Row -->
+   <div class="row">
+     <div class="col-md-4">
+       <div class="card hoverable">
+         <div class="card-image">
+           <img src="img/project4.png">
+           <span class="card-title">Photographer Portfolio</span>
+         </div>
+         <div class="card-content">
+           <p>Photography is an art of observation. It’s about finding something interesting an ordinary place… I’ve found it has little to do with the things you see and everything...</p>
+         </div>
+         <div class="card-action">
+           <a href="http://mdbootstrap.com/product/magic-portfolio-photographer/">
+             <button type="button" class="btn btn-info waves-effect waves-light">Read more</button>
+           </a>
+         </div>
+       </div>
+     </div>
+     <!-- /.col-md-4 -->
+     <div class="col-md-4">
+       <div class="card hoverable">
+         <div class="card-image">
+           <img src="img/project5.png">
+           <span class="card-title">Services Portfolio</span>
+         </div>
+         <div class="card-content">
+           <p>We offer a variety of advertising services focusing on your goals. You could say we are a one-stop shop for small to medium sized businesses. From online...</p>
+         </div>
+         <div class="card-action">
+           <a href="http://mdbootstrap.com/product/magic-portfolio-for-creative-agency">
+             <button type="button" class="btn btn-info waves-effect waves-light">Read more</button>
+           </a>
+         </div>
+       </div>
+     </div>
+     <!-- /.col-md-4 -->
+     <div class="col-md-4">
+       <div class="card hoverable">
+         <div class="card-image">
+           <img src="img/project6.png">
+           <span class="card-title">Card Title</span>
+         </div>
+         <div class="card-content">
+           <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.</p>
+         </div>
+         <div class="card-action">
+           <button type="button" class="btn btn-info waves-effect waves-light">Read more</button>
+         </div>
+       </div>
+     </div>
+     <!-- /.col-md-4 -->
+   </div>
+   <!-- /.row -->
+
+
+   <hr>
+
+   <!-- Pagination -->
+   <div class="row text-center">
+     <div class="col-lg-12">
+       <ul class="pagination">
+         <li>
+           <a href="#">&laquo;</a>
+         </li>
+         <li class="active">
+           <a href="#">1</a>
+         </li>
+         <li>
+           <a href="#">2</a>
+         </li>
+         <li>
+           <a href="#">3</a>
+         </li>
+         <li>
+           <a href="#">4</a>
+         </li>
+         <li>
+           <a href="#">5</a>
+         </li>
+         <li>
+           <a href="#">&raquo;</a>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <!-- /.row -->
+
+   <hr>
+
+ </div>
+ <!-- /.container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h1 class="text-center">APIs <small>Utilisation de deux API</small></h1>
 
 <div class="row">
@@ -15,11 +278,11 @@
       </div>
 
       <div class="form-group" >
-        <select class="form-control" name = "type" onchange="this.form.submit()">
+        <select class="form-control" name="genre" onchange="this.form.submit()">
           <option value="bar" selected>Selectionner un paramètre</option >
-          <% for (var i=0 ; i < api2.genre.length ; i++) {
-          <!-- var g = api2[i]; %> -->
-          <option value="<%= %>" ><%= api2.genre[i] %></option>
+          <%for (var i=0 ; i < api2.genre.length ; i++) {
+            var genre = api2.genre[i]; %>
+          <option value="<%= api2.genre[i] %>" ><%= api2.genre[i] %></option>
           <% } %>
 
         </select >
@@ -29,8 +292,10 @@
 </div>
 </div>
 
-  <% for (var i=0 ; i < api1.movies.length ; i++) {
-     var movie = api1.movies[i]; %>
+  <% if (api1.length != 0) {
+      for (var i=0 ; i < api1.movies.length ; i++) {
+      var movie = api1.movies[i]; %>
+
   <div class="col-md-2">
     <img src="<%= movie.medium_cover_image %>" class="img-responsive" alt="Responsive image">
     <dl>
@@ -39,12 +304,21 @@
 
       <% for (var j=0 ; j < movie.torrents.length ; j++) {
          var torrent = movie.torrents[j]; %>
-         <dd> <a href=" <%= torrent.url %>"><%= torrent.quality %></a> </dd>
+         <dd> <a href=" <%= torrent.url %>"><%= torrent.quality %> </a>  - peers: <%= torrent.peers %> - seeds: <%= torrent.seeds %> </dd>
       <% } %>
 
     </dl>
+
   </div>
   <% } %>
+<% } else { %>
+    <div class="col-md-12">
+      <p>
+        Aucun films n'est présent dans cette catégorie
+      </p>
+
+    </div>
+  <% }  %>
 
 
 

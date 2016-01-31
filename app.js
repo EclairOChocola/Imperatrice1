@@ -69,12 +69,12 @@ app.get('/servicesweb/overpass', function(req, res) {
 
 
 app.get('/APIs', function(req, res) {
-	if(req.query.type) {
-		var valeur = req.query.type;
+	if(req.query.genre) {
+		var valeur = req.query.genre;
 	} else {
 		var valeur = "Action";
 	}
-	var url1 = "https://yts.ag/api/v2/list_movies.json?limit=50&genre="+valeur+"";
+	var url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&genre='+valeur;
 	var url2 = "http://remydumas.com/api/genre";
 
 	async.parallel([
@@ -88,7 +88,7 @@ app.get('/APIs', function(req, res) {
 	function(callback) {
 		request(url2, function(err, response, body) {
 			obj = JSON.parse(body);
-			console.log(obj);
+			//console.log(obj);
 
 			callback(false, obj);
 		});

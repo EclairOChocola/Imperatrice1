@@ -16,32 +16,7 @@ var nbConnexions = 0;
 
 app.use(express.static(__dirname + "/libs"));
 
-//================================================================
-//================================================================
-app.get('/', function(req, res) {
-	res.render('accueil.ejs'); //console.log("accueil");
-});
-
-app.get('/sortie', function(req, res) {
-	res.render('sortie.ejs'); //console.log("sortie");
-});
-
 /*app.get('/servicesweb/overpass', function(req, res) {
-	res.render('overpass.ejs'); //console.log("sortie");
-});*/
-
-app.get('/params', function(req, res) {
-	var urlObjet = url.parse(req.url);
-	var chemin = urlObjet.pathname;
-	var paramsTab = querystring.parse(urlObjet.query); //Parse parametres
-	res.send("<h1> Liste des parametres </h1> <br/>" + params.params2html(paramsTab)); //console.log("params");
-});
-
-app.get('/bonjour/:var1/:var2', function(req, res) {
-	res.render('bonjour.ejs', {prenom: req.params.var1, nom:req.params.var2});
-});
-
-app.get('/servicesweb/overpass', function(req, res) {
 	var donnees = "";
 	if(req.query.type) {
 		var valeur = req.query.type;
@@ -64,17 +39,17 @@ app.get('/servicesweb/overpass', function(req, res) {
 	reqOverpass.on('error', function(e) {
 		console.error(e);
 	});
-});
+});*/
 
 
 
-app.get('/APIs', function(req, res) {
+app.get('/', function(req, res) {
 	if(req.query.genre) {
 		var valeur = req.query.genre;
 	} else {
 		var valeur = "Action";
 	}
-	var url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&genre='+valeur;
+	var url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=year&genre=' + valeur;
 	var url2 = "http://remydumas.com/api/genre";
 
 	async.parallel([
@@ -94,7 +69,6 @@ app.get('/APIs', function(req, res) {
 		});
 	},],
 	function(err, results) {
-		console.log(results[1]);
 		res.render('APIs.ejs', {api1:results[0].data, api2:results[1]} );
 	});
 	//res.render('APIs.ejs');
@@ -166,23 +140,19 @@ reqOverpass.on('error', function(e) {
 //================================================================
 //================================================================
 app.use(function(req, res) {
-console.log("Page introuvable");
 res.send('La page demandée n\'existe pas');
 });
 
 server.on('request', function(req, res) {
 	res.writeHead(200);
 	nbRequetes ++;
-	console.log("Requete N°"+nbRequetes);
 });
 
 server.on("connection", function () {
 	if (nbConnexions >= 2) {
 		server.close();
-		console.log("Serveur fermé !");
 	} else {
 		nbConnexions ++;
-		console.log("New user !");
 	}
 });
 app.listen(8181);

@@ -44,10 +44,11 @@ app.use(express.static(__dirname + "/libs"));
 
 
 app.get('/', function(req, res) {
+	var valeur;
 	if(req.query.genre) {
-		var valeur = req.query.genre;
+		 valeur = req.query.genre;
 	} else {
-		var valeur = "Action";
+		 valeur = "Action";
 	}
 	var url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=year&genre=' + valeur;
 	var url2 = "http://remydumas.com/api/genre";

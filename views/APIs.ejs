@@ -1,6 +1,6 @@
 
 <% include ./elem/header.ejs %>
-
+<% include ./elem/nav.ejs %>
 
 <!-- Page Content -->
  <div class="container">
@@ -8,47 +8,42 @@
    <!-- Page Header -->
    <div class="row">
      <div class="col-lg-12">
-       <h1 class="page-header">Downloads à GOGO
-                   <small>Unlimited torrents download</small>
-               </h1>
+       <h1 class="page-header">Imperatrice
+          <small>Unlimited torrents download</small>
+       </h1>
      </div>
    </div>
    <!-- /.row -->
 
    <!-- Content Row -->
    <div class="row">
-
-
-
      <% if (api1.length != 0) {
-         for (var i=0 ; i < api1.movies.length ; i++) {
+       for (var i=0 ; i < api1.movies.length ; i++) {
          var movie = api1.movies[i]; %>
-   <div class="col-md-3">
-     <div class="card hoverable">
-       <div class="card-image">
-         <img src="<%= movie.medium_cover_image %>">
-         <span class="card-title"> <%= movie.title %> </span>
-       </div>
-       <div class="card-content">
-         <p> <%= movie.year %> </p>
-         <% for (var j=0 ; j < movie.torrents.length ; j++) {
-            var torrent = movie.torrents[j]; %>
-            <b> <a href=" <%= torrent.url %>"><%= torrent.quality %> </a>  - peers: <%= torrent.peers %> - seeds: <%= torrent.seeds %> </b> <br/>
-         <% } %>
-       </div>
-       <div class="card-action">
-         <a href="http://mdbootstrap.com/product/magic-portfolio-for-video-maker/">
-           <button type="button" class="btn btn-info waves-effect waves-light">Read more</button>
-         </a>
-       </div>
-     </div>
-   </div>
-     <% } %>
-   <% } else { %>
-         <p>
-           Aucun films n'est présent dans cette catégorie
-         </p>
-     <% }  %>
+         <div class="col-md-3">
+           <div class="card hoverable">
+              <div class="card-image">
+                <img src="<%= movie.medium_cover_image %>">
+                <h6 class="card-title"><kbd><%= movie.rating %></kbd></h6>
+              </div>
+             <div class="card-content">
+               <p> <%= movie.title_long %> </p>
+               <% for (var j=0 ; j < movie.torrents.length ; j++) {
+                  var torrent = movie.torrents[j]; %>
+                  <b> <a href="<%= torrent.url %>"><%= torrent.quality %> </a></b>
+               <% } %>
+             </div>
+             <div class="card-action">
+               <a href="/details?id=<%= api1.movies[i].id %>">
+                 <button type="button" class="btn btn-info waves-effect waves-light">Details</button>
+               </a>
+             </div>
+           </div>
+         </div>
+    <% } %>
+  <% } else { %>
+      <p>Aucun films n'est présent dans cette catégorie</p>
+  <% }  %>
 </div>
 
 <% include ./elem/footer.ejs %>

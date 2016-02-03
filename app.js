@@ -16,22 +16,23 @@ var nbConnexions = 0;
 
 app.use(express.static(__dirname + "/libs"));
 
-/*app.get('/servicesweb/overpass', function(req, res) {
+app.get('/details', function(req, res) {
 	var donnees = "";
-	if(req.query.type) {
-		var valeur = req.query.type;
+	var valeur;
+	if(req.query.id) {
+		valeur = req.query.id;
 	} else {
-		var valeur = "bar";
+		valeur = "10";
 	}
-	var url = "http://overpass-api.de/api/interpreter?[out:json];(node[amenity="+valeur+"](45.15414,5.677606,45.214077,5.753118););out;";
-	var reqOverpass = http.get(url, function(resOverpass){
+	var url = "https://yts.ag/api/v2/movie_details.json?movie_id="+ valeur +"&with_images=true&with_cast=true";
+	var reqOverpass = https.get(url, function(resOverpass){
 		resOverpass.on('data', function(data) {
 			donnees += data;
 		});
 
 		resOverpass.on('end', function(){
 			donnees = JSON.parse(donnees);
-			res.render('overpass.ejs', {elements : donnees.elements} );
+			res.render('overpass.ejs', {elements : donnees.data.movie} );
 		});
 
 	});
@@ -39,18 +40,20 @@ app.use(express.static(__dirname + "/libs"));
 	reqOverpass.on('error', function(e) {
 		console.error(e);
 	});
-});*/
+});
 
 
 
 app.get('/', function(req, res) {
 	var valeur;
+	var url1;
 	if(req.query.genre) {
 		 valeur = req.query.genre;
+		 url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=year&genre=' + valeur;
 	} else {
-		 valeur = "Action";
+		 url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=like_count';
 	}
-	var url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=year&genre=' + valeur;
+
 	var url2 = "http://remydumas.com/api/genre";
 
 	async.parallel([
@@ -80,8 +83,8 @@ app.get('/', function(req, res) {
 app.get('/compte/creation', function(req, res) {
 	if(req.query.pseudo && req.query.mail && req.query.pass) {
 		var pseudo = req.query.pseudo;
-		var mail = req.query.mail
-		var pass = req.query.pass
+		var mail = req.query.mail;
+		var pass = req.query.pass;
 		console.log(pseudo + " " + mail + " " + pass);
 
 		var sqlite3 = require('sqlite3').verbose();

@@ -1,50 +1,42 @@
 <% include ./elem/header.ejs %>
-<h1>API BITCHES !!</h1>
-<div class="row">
-  <div class="col-md-12">
-    <form class="form-inline well well-sm col-md-10 col-md-offset-1" action="/servicesweb/overpass" method="get">
-      <span class="glyphicon glyphicon-search" ></span >
 
-      <div class="form-group" >
-        <input type="text" name="type" class="form-control" id="name"
-               placeholder="restaurant, bar etc..."
-					/>
-          <button class="btn btn-success" type="submit" name="button">Envoyer</button>
+<div class="container" background>
+    <p> <%= elements.title_long %> <kbd><%= elements.rating %></kbd></p>
+    <% for(i=0; i < elements.genres.length; i++) { %>
+      <p> <%= elements.genres[i] %> </p>
+    <% } %>
+
+    <div class="row">
+      <p> <%= elements.title_long %> </p>
+      <div class="col-md-3">
+        <img src="<%= elements.medium_cover_image %>">
       </div>
-    </form>
-  </div>
+
+      <div class="col-md-9">
+        <div class="card-panel grey darken-3">
+          <span class="white-text">
+              <%= elements.synopsis %>
+          </span>
+        </div>
+      </div>
+    </div>
 </div>
 
-<div class="row">
-  <div class="table-responsive col-md-10 col-md-offset-1">
-    <table class="table table-striped table-bordered" >
-    	<tr>
-    		<th> Nom <span class="badge"> <%= elements.length %> </span> </th>
-    		<th> Type</th>
-    		<th> Latitude</th>
-    		<th> Longitude</th>
-    	</tr>
 
-      <% for (var i=0 ; i < elements.length ; i++) {
-      var el = elements[i]; %>
-      <tr>
-        <td> <%= el.tags.name %></td>
-        <td> <%= el.tags.amenity %></td>
-        <td> <%= el.lat %></td>
-        <td> <%= el.lon %></td>
-      </tr>
-      <% } %>
+  <img src="<%= elements.background_image %>">
 
-      <% if (elements.length == 0) { %>
-      <tr class="info">
-        <td>Aucun résultat pour votre recherche</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <% } %>
-    </table >
-  </div>
+
+
+  <% for(j=0; j < elements.cast.length; j++) { %>
+    <p> <%= elements.cast[j].name %> </p>
+    <p> <%= elements.cast[j].character_name %> </p>
+    <img src="<%= elements.cast[j].url_small_image %>">
+  <% } %>
+
+  <% for (var h=0 ; h < elements.torrents.length ; h++) { %>
+     <b> <a href=" <%= elements.torrents[h].url %>"><%= elements.torrents[h].quality %> </a>  - peers: <%= elements.torrents[h].peers %> - seeds: <%= elements.torrents[h].seeds %> </b> <br/>
+  <% } %>
+
 </div>
 
 <% include ./elem/footer.ejs %>

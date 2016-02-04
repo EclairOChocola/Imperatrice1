@@ -30,7 +30,7 @@
                <p> <%= movie.title_long %> </p>
                <% for (var j=0 ; j < movie.torrents.length ; j++) {
                   var torrent = movie.torrents[j]; %>
-                  <b> <a href="<%= torrent.url %>"><%= torrent.quality %> </a></b>
+                  <b> <a href="<%= torrent.url %>"><%= torrent.quality %>  </a></b>
                <% } %>
              </div>
              <div class="card-action">

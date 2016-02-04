@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar z-depth-2 info-color">
+<nav class="navbar z-depth-2 grey darken-3">
   <div class="container ">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -17,7 +17,7 @@
     </li> -->
         <li class="dropdown" size="5">
           <a href="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" role="button" aria-expanded="false">Genres<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu grey darken-3" role="menu">
             <%for (var i=0 ; i < api2.genre.length ; i++) {
               var genre = api2.genre[i]; %>
               <li> <a href="?genre=<%= api2.genre[i] %>"><%= api2.genre[i] %> </a> </li>

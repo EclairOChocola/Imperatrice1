@@ -1,6 +1,17 @@
 <% include ./elem/header.ejs %>
 
 <div class="container" background>
+
+    <% for(key in elements.subtitles.subs) {   %>
+      <p> <%= elements.subtitles.subs[key][0].url %> </p>
+      <p> <%= key %> </p>
+    <% } %>
+
+
+
+
+
+
     <p> <%= elements.title_long %> <span class="label label-danger"><%= elements.rating %></span></p>
     <% for(i=0; i < elements.genres.length; i++) { %>
       <p> <%= elements.genres[i] %> </p>

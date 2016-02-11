@@ -20,7 +20,6 @@ app.use(express.static(__dirname + "/libs"));
 app.get('/details', function(req, res) {
 	var donnees = "";
 	var valeur;
-	var subtitles;
 	if(req.query.id) {
 		valeur = req.query.id;
 	} else {
@@ -34,12 +33,11 @@ app.get('/details', function(req, res) {
 
 		resOverpass.on('end', function(){
 			donnees = JSON.parse(donnees);
-			console.log(donnees);
 			YFsubs.getSubs(donnees.data.movie.imdb_code).then(function(data){
-			        subtitles = data
+				donnees.data.movie.subtitles = data;
+				console.log(donnees.data.movie);
+				res.render('overpass.ejs', {elements : donnees.data.movie} );
 			});
-			console.log(subtitles);
-			res.render('overpass.ejs', {elements : donnees.data.movie, st : subtitles} );
 		});
 
 	});

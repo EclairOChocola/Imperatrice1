@@ -9,6 +9,7 @@ var https 			= require('https');
 var server 			= http.createServer();
 var async 			= require('async');
 var request 		= require('request');
+var YFsubs 			= require("yify-subs");
 
 // Var globals
 var nbRequetes = 0;
@@ -19,6 +20,7 @@ app.use(express.static(__dirname + "/libs"));
 app.get('/details', function(req, res) {
 	var donnees = "";
 	var valeur;
+	var subtitles;
 	if(req.query.id) {
 		valeur = req.query.id;
 	} else {
@@ -32,7 +34,12 @@ app.get('/details', function(req, res) {
 
 		resOverpass.on('end', function(){
 			donnees = JSON.parse(donnees);
-			res.render('overpass.ejs', {elements : donnees.data.movie} );
+			console.log(donnees);
+			YFsubs.getSubs(donnees.data.movie.imdb_code).then(function(data){
+			        subtitles = data
+			});
+			console.log(subtitles);
+			res.render('overpass.ejs', {elements : donnees.data.movie, st : subtitles} );
 		});
 
 	});
@@ -51,7 +58,7 @@ app.get('/', function(req, res) {
 		 valeur = req.query.genre;
 		 url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=year&genre=' + valeur;
 	} else {
-		 url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=like_count';
+		 url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=year';
 	}
 
 	var url2 = "http://remydumas.com/api/genre";
@@ -75,7 +82,6 @@ app.get('/', function(req, res) {
 	function(err, results) {
 		res.render('APIs.ejs', {api1:results[0].data, api2:results[1]} );
 	});
-	//res.render('APIs.ejs');
 });
 
 

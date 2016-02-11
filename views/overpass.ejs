@@ -1,7 +1,7 @@
 <% include ./elem/header.ejs %>
 
 <div class="container" background>
-    <p> <%= elements.title_long %> <span class="label label-danger"><%= movie.rating %></span></p>
+    <p> <%= elements.title_long %> <span class="label label-danger"><%= elements.rating %></span></p>
     <% for(i=0; i < elements.genres.length; i++) { %>
       <p> <%= elements.genres[i] %> </p>
     <% } %>
@@ -15,7 +15,7 @@
       <div class="col-md-9">
         <div class="card-panel grey darken-3">
           <span class="white-text">
-              <%= elements.synopsis %>
+              <%= elements.description_full %>
           </span>
         </div>
       </div>

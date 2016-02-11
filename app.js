@@ -15,7 +15,7 @@ var YFsubs 			= require("yify-subs");
 var nbRequetes = 0;
 var nbConnexions = 0;
 
-app.use(express.static(__dirname + "/libs"));
+app.use(express.static(__dirname + "/bower_components"));
 
 app.get('/details', function(req, res) {
 	var donnees = "";

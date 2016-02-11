@@ -3,11 +3,11 @@
 <% include ./elem/nav.ejs %>
 
 <!-- Page Content -->
- <div class="container">
+ <!-- <div class="container"> -->
 
    <!-- Page Header -->
    <div class="row">
-     <div class="col-lg-12">
+     <div class="col s12">
        <h1 class="page-header">Imperatrice</h1>
      </div>
    </div>
@@ -18,19 +18,26 @@
      <% if (api1.length != 0) {
        for (var i=0 ; i < api1.movies.length ; i++) {
          var movie = api1.movies[i]; %>
-         <div class="col-md-3">
-           <div class="card hoverable">
-              <div class="card-image">
-                <img src="<%= movie.medium_cover_image %>">
-                <h6 class="card-title"><span class="badge"><%= movie.rating %></span></h6>
+         <div class="col s2">
+           <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="<%= movie.small_cover_image %>">
+                <span class="card-title"><%= movie.rating %></span>
               </div>
+
              <div class="card-content">
-               <p> <%= movie.title_long %> </p>
+               <span> <%=  if(movie.title_long.length > 27) { movie.title_long }  %> %> <i class="material-icons right">more_vert</i></span>
                <% for (var j=0 ; j < movie.torrents.length ; j++) {
                   var torrent = movie.torrents[j]; %>
                   <b> <a href="<%= torrent.url %>"><%= torrent.quality %>  </a></b>
                <% } %>
              </div>
+
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
+
              <div class="card-action">
                <a href="/details?id=<%= api1.movies[i].id %>">
                  <button type="button" class="btn btn-warning waves-effect waves-light">Details</button>
@@ -42,6 +49,6 @@
   <% } else { %>
       <p>Aucun films n'est présent dans cette catégorie</p>
   <% }  %>
-</div>
+<!-- </div> -->
 
 <% include ./elem/footer.ejs %>

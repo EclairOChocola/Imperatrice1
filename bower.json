@@ -1,0 +1,21 @@
+{
+  "name": "remy",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Rémy Dumas <remy-dumas@hotmail.fr>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#^0.97.5"
+  }
+}

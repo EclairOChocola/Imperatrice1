@@ -1,53 +1,91 @@
 <% include ./elem/header.ejs %>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.parallax').parallax();
+      });
+</script>
 
-<div class="container" background>
+  <div class="fixed-action-btn horizontal" style="top: 25px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">subtitles</i>
+    </a>
+    <ul>
+      <% for(key in elements.subtitles.subs) {
+            var bestrate = -100
+            var id = 0
+            if(key != 'el' && key != 'pt-br' && key != 'he' && key != 'ko') { %>
+        <li value="<%= key %>">
+          <% for(k=0; k < elements.subtitles.subs[key].length; k++) {
+                if(elements.subtitles.subs[key][k].rating > bestrate) {
+                    bestrate = elements.subtitles.subs[key][k].rating;
+                    id = k;
+                }
+             } %>
+            <a href="<%= elements.subtitles.subs[key][id].url %>" class="flag-icon flag-icon-<%= key %>"></a>
+        </li>
+        <% }
+       } %>
+    </ul>
+  </div>
 
-    <% for(key in elements.subtitles.subs) {   %>
-      <p> <%= elements.subtitles.subs[key][0].url %> </p>
-      <p> <%= key %> </p>
-    <% } %>
+<div class="parallax-container" style="height: 350px;">
+    <div class="parallax"><img src="<%= elements.background_image %>"></div>
+</div>
 
+<div class="container">
 
+  <div class="row">
+     <article class="container ca-blogs">
+         <div class="title-center">
+             <div class="bottom-line">
+                 <h2 class="title-h4"><%= elements.title %></h2>
+                 <span class="line"><em></em></span>
+             </div>
+         </div>
 
+         <div class="overhide">
+             <div class="description col xs12 s12 m8 offset-m2 l6 offset-l3">
+                 <p class="center-align">
+                   <% for(i=0; i < elements.genres.length; i++) {
+                        if(i == elements.genres.length - 1) { %>
+                          <span> <%= elements.genres[i] %></span>
+                    <%  } else { %>
+                          <span> <%= elements.genres[i] %> -  </span>
+                    <%  }
+                     } %>
+                 </p>
+             </div>
+         </div>
 
+         <div class="row gutter-bottom">
+             <div class="col xs12 s6 m6 l6">
+                 <div class="">
+                     <a href="#!"><img class="responsive-img materialboxed" data-caption="<%= elements.title_long %>" src="<%= elements.large_cover_image %>" /></a>
+                 </div>
+             </div>
 
-
-    <p> <%= elements.title_long %> <span class="label label-danger"><%= elements.rating %></span></p>
-    <% for(i=0; i < elements.genres.length; i++) { %>
-      <p> <%= elements.genres[i] %> </p>
-    <% } %>
-
-    <div class="row">
-      <p> <%= elements.title_long %> </p>
-      <div class="col-md-3">
-        <img src="<%= elements.medium_cover_image %>">
-      </div>
-
-      <div class="col-md-9">
-        <div class="card-panel grey darken-3">
-          <span class="white-text">
-              <%= elements.description_full %>
-          </span>
-        </div>
-      </div>
+             <div class="col xs12 s6 m6 l6">
+                 <div>
+                     <label class="primaryColor"><%= elements.year %></label>
+                     <h5 class="uppercase title-6">Prologue</h5>
+                 </div>
+                 <div>
+                     <p><%= elements.description_full %></p>
+                 </div>
+                 <div class="ca-btn">
+                   <% for (var h=0 ; h < elements.torrents.length ; h++) { %>
+                      <a class="btn grey waves-effect" href=" <%= elements.torrents[h].url %>"><%= elements.torrents[h].quality %></a>
+                   <% } %>
+                 </div>
+             </div>
+         </div>
     </div>
 </div>
-
-
-  <img src="<%= elements.background_image %>">
-
-
-
-  <% for(j=0; j < elements.cast.length; j++) { %>
-    <p> <%= elements.cast[j].name %> </p>
-    <p> <%= elements.cast[j].character_name %> </p>
-    <img src="<%= elements.cast[j].url_small_image %>">
-  <% } %>
-
-  <% for (var h=0 ; h < elements.torrents.length ; h++) { %>
-     <b> <a href=" <%= elements.torrents[h].url %>"><%= elements.torrents[h].quality %> </a>  - peers: <%= elements.torrents[h].peers %> - seeds: <%= elements.torrents[h].seeds %> </b> <br/>
-  <% } %>
-
+<div class="parallax-container">
+    <div class="parallax"><img src="<%= elements.background_image %>"></div>
 </div>
+
+
+
 
 <% include ./elem/footer.ejs %>

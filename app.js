@@ -1,4 +1,3 @@
-﻿// Imports
 var url 				= require('url');
 var params 			= require('params');
 var querystring = require('querystring');
@@ -15,7 +14,7 @@ var YFsubs 			= require("yify-subs");
 var nbRequetes = 0;
 var nbConnexions = 0;
 
-app.use(express.static(__dirname + "/bower_components"));
+app.use(express.static(__dirname));
 
 app.get('/details', function(req, res) {
 	var donnees = "";
@@ -35,7 +34,6 @@ app.get('/details', function(req, res) {
 			donnees = JSON.parse(donnees);
 			YFsubs.getSubs(donnees.data.movie.imdb_code).then(function(data){
 				donnees.data.movie.subtitles = data;
-				console.log(donnees.data.movie);
 				res.render('overpass.ejs', {elements : donnees.data.movie} );
 			});
 		});
@@ -66,7 +64,7 @@ app.get('/', function(req, res) {
 		request(url1, function(err, response, body) {
 			obj = JSON.parse(body);
 			callback(false, obj);
-			//console.log(obj.data);
+			console.log(obj.data);
 		});
 	},
 	function(callback) {

@@ -13,44 +13,43 @@
    </div>
    <!-- /.row -->
 
-   <div class="container" style="max-width: none; width: 100%;">
-   <div class="row">
-     <% if (api1.length != 0) {
-       for (var i=0 ; i < api1.movies.length ; i++) {
-         var movie = api1.movies[i]; %>
-         <div class="col s12 m4 l2">
-           <div class="card">
-              <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="<%= movie.large_cover_image %>">
-                <span class="card-title"><%= movie.rating %></span>
-              </div>
+   <div class="container" style="max-width: none; width: 96%;">
+       <div class="row">
+         <% if (api1.length != 0) {
+           for (var i=0 ; i < api1.movies.length ; i++) {
+             var movie = api1.movies[i]; %>
+             <div class="col s12 m4 l3">
+               <div class="card">
+                  <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="<%= movie.large_cover_image %>">
+                    <span class="card-title"><%= movie.rating %></span>
+                  </div>
 
-             <div class="card-content">
+                 <div class="card-content">
+                     <p class="activator"><span><%= movie.title_long %></span><i class="material-icons col s2 right">more_vert</i></p>
 
-                 <p class="activator truncate"> <%= movie.title_long %> <i class="material-icons right">more_vert</i></p>
+                   <% for (var j=0 ; j < movie.torrents.length ; j++) {
+                      var torrent = movie.torrents[j]; %>
+                      <b> <a href="<%= torrent.url %>"><%= torrent.quality %>  </a></b>
+                   <% } %>
+                 </div>
 
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4"><%= movie.title %><i class="material-icons right">close</i></span>
+                  <p><%= movie.summary %></p>
+                </div>
 
-               <% for (var j=0 ; j < movie.torrents.length ; j++) {
-                  var torrent = movie.torrents[j]; %>
-                  <b> <a href="<%= torrent.url %>"><%= torrent.quality %>  </a></b>
-               <% } %>
+                 <div class="card-action">
+                   <a href="/details?id=<%= api1.movies[i].id %>">
+                     <button type="button" class="btn btn-warning waves-effect waves-light">Details</button>
+                   </a>
+                 </div>
+               </div>
              </div>
-
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4"><%= movie.title %><i class="material-icons right">close</i></span>
-              <p><%= movie.summary %></p>
-            </div>
-
-             <div class="card-action">
-               <a href="/details?id=<%= api1.movies[i].id %>">
-                 <button type="button" class="btn btn-warning waves-effect waves-light">Details</button>
-               </a>
-             </div>
-           </div>
-         </div>
-    <% } %>
-  <% } else { %>
-      <p>Aucun films n'est présent dans cette catégorie</p>
-  <% }  %>
-<!-- </div> --></div>
+        <% } %>
+      <% } else { %>
+          <p>Aucun films n'est présent dans cette catégorie</p>
+      <% }  %>
+      </div>
+    </div>
 <% include ./elem/footer.ejs %>

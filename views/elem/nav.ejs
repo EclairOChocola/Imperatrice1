@@ -1,59 +1,20 @@
 <!-- Navigation -->
-<!-- <nav class="navbar z-depth-2 grey darken-3">
-  <div class="container ">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand waves-effect waves-light" href="#">Imperatrice</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="dropdown" size="5">
-          <a href="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" role="button" aria-expanded="false">Genres<span class="caret"></span></a>
-          <ul class="dropdown-menu grey darken-3" role="menu">
-            <%for (var i=0 ; i < api2.genre.length ; i++) {
-              var genre = api2.genre[i]; %>
-              <li> <a href="?genre=<%= api2.genre[i] %>"><%= api2.genre[i] %> </a> </li>
-            <% } %>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-right waves-effect waves-light" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-      </form>
-    </div>
-  </div>
-</nav> -->
-
-
-
-
-
-
-
-
+<ul id="dropdownGenre" class="dropdown-content">
+  <%for (var i=0 ; i < api2.genre.length ; i++) {
+      if(api2.genre[i] != "Reality-TV") {
+        var genre = api2.genre[i]; %>
+        <li> <a href="?genre=<%= api2.genre[i] %>"><%= api2.genre[i] %> </a> </li>
+    <% }
+    } %>
+</ul>
 <nav>
   <div class="nav-wrapper grey darken-4">
-    <a src="#" class="brand-logo"></a>
-    <a href="" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="#">Genre</a></li>
-      <li><a href="#">Components</a></li>
-      <li><a href="#">Javascript</a></li>
-      <li><a href="#">Mobile</a></li>
-    </ul>
-    <ul class="side-nav" id="mobile-demo">
-      <li><a href="#">Genre</a></li>
-      <li><a href="#">Components</a></li>
-      <li><a href="#">Javascript</a></li>
-      <li><a href="#">Mobile</a></li>
+    <a src="#" class="brand-logo hide-on-med-and-down"></a>
+    <ul class="right">
+      <li><a class="dropdown-button" href="#!" data-activates="dropdownGenre">Genres<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a href="?sort_by=like_count">Like</a></li>
+      <li><a href="?sort_by=year">Recent</a></li>
+      <li><a href="?sort_by=rating">Rate</a></li>
     </ul>
   </div>
 </nav>

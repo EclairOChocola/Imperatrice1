@@ -26,7 +26,7 @@
                   </div>
 
                  <div class="card-content">
-                     <p class="activator"><span><%= movie.title_long %></span><i class="material-icons col s2 right">more_vert</i></p>
+                     <p class="activator"><span class="truncate"><%= movie.title_long %></span><i class="material-icons col s2 right">more_vert</i></p>
 
                    <% for (var j=0 ; j < movie.torrents.length ; j++) {
                       var torrent = movie.torrents[j]; %>

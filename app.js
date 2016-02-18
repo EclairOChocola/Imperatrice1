@@ -48,15 +48,14 @@ app.get('/details', function(req, res) {
 
 
 app.get('/', function(req, res) {
-	var valeur;
 	var url1;
 	if(req.query.genre) {
-		 valeur = req.query.genre;
-		 url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=year&genre=' + valeur;
-	} else {
+		 url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=year&genre=' + req.query.genre;
+	} else if(req.query.sort_by) {
+		 url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=' + req.query.sort_by;
+	}else {
 		 url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&sort_by=year';
 	}
-
 	var url2 = "http://remydumas.com/api/genre";
 
 	async.parallel([
@@ -64,7 +63,7 @@ app.get('/', function(req, res) {
 		request(url1, function(err, response, body) {
 			obj = JSON.parse(body);
 			callback(false, obj);
-			console.log(obj.data);
+			//console.log(obj.data);
 		});
 	},
 	function(callback) {

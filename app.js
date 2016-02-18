@@ -48,15 +48,15 @@ app.get('/details', function(req, res) {
 
 
 app.get('/', function(req, res) {
-	var url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&page=1' ;
+	var url1 = 'https://yts.ag/api/v2/list_movies.json?limit=50&page=1&' ;
 	if(req.query.genre && req.query.sort_by) {
-		 url1 = url1 + 'sort_by='+ req.query.sort_by +'&genre=' + req.query.genre;
+		 url1 += 'sort_by='+ req.query.sort_by +'&genre=' + req.query.genre;
 	} else if(req.query.sort_by) {
-		 url1 = 'sort_by=' + req.query.sort_by;
+		 url1 += 'sort_by=' + req.query.sort_by;
 	}else if(req.query.genre) {
-		 url1 = 'genre=' + req.query.genre;
+		 url1 += 'genre=' + req.query.genre;
 	}else {
-		 url1 = 'sort_by=year';
+		 url1 += 'sort_by=year';
 	}
 	var url2 = "http://remydumas.com/api/genre";
 

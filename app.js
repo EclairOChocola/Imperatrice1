@@ -24,25 +24,30 @@ app.get('/details', function(req, res) {
 	} else {
 		valeur = "10";
 	}
-	var url = "https://yts.ag/api/v2/movie_details.json?movie_id="+ valeur +"&with_images=true&with_cast=true";
-	var reqOverpass = https.get(url, function(resOverpass){
-		resOverpass.on('data', function(data) {
-			donnees += data;
-		});
+	var urlDetails = "https://yts.ag/api/v2/movie_details.json?movie_id="+ valeur +"&with_images=true&with_cast=true";
+	var urlSuggestions ="https://yts.ag/api/v2/movie_suggestions.json?movie_id="+ valeur;
 
-		resOverpass.on('end', function(){
-			donnees = JSON.parse(donnees);
-			YFsubs.getSubs(donnees.data.movie.imdb_code).then(function(data){
-				donnees.data.movie.subtitles = data;
-				res.render('overpass.ejs', {elements : donnees.data.movie} );
+		async.parallel([
+		function(callback) {
+			request(urlDetails, function(err, response, body) {
+				obj = JSON.parse(body);
+				obj.data.movie.subtitles = false;
+				YFsubs.getSubs(obj.data.movie.imdb_code).then(function(data){
+					obj.data.movie.subtitles = data;
+				});
+				callback(false, obj);
 			});
+		},
+		function(callback) {
+			request(urlSuggestions, function(err, response, body) {
+				obj = JSON.parse(body);
+				// console.log(obj);
+				callback(false, obj);
+			});
+		},],
+		function(err, results) {
+			res.render('overpass.ejs', {elements: results[0].data.movie, suggestions: results[1].data} );
 		});
-
-	});
-	reqOverpass.end();
-	reqOverpass.on('error', function(e) {
-		console.error(e);
-	});
 });
 
 

@@ -1,33 +1,112 @@
 <% include ./elem/header.ejs %>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('.parallax').parallax();
       });
 </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
+</script>
 
+<!-- Floating button subtitles -->
   <div class="fixed-action-btn horizontal" style="top: 25px; right: 24px;">
     <a class="btn-floating btn-large red">
       <i class="large material-icons">subtitles</i>
     </a>
     <ul>
-      <% for(key in elements.subtitles.subs) {
-            var bestrate = -100
-            var id = 0
-            if(key != 'el' && key != 'pt-br' && key != 'he' && key != 'ko') { %>
-        <li value="<%= key %>">
-          <% for(k=0; k < elements.subtitles.subs[key].length; k++) {
-                if(elements.subtitles.subs[key][k].rating > bestrate) {
-                    bestrate = elements.subtitles.subs[key][k].rating;
-                    id = k;
-                }
-             } %>
-            <a href="<%= elements.subtitles.subs[key][id].url %>" class="flag-icon flag-icon-<%= key %>"></a>
-        </li>
-        <% }
-       } %>
+      <% if(elements.subtitles !== false) { %>
+        <% for(key in elements.subtitles.subs) {
+              var bestrate = -100;
+              var id = 0;
+              if(key != 'el' && key != 'pt-br' && key != 'he' && key != 'ko') { %>
+          <li value="<%= key %>">
+            <% for(k=0; k < elements.subtitles.subs[key].length; k++) {
+                  if(elements.subtitles.subs[key][k].rating > bestrate) {
+                      bestrate = elements.subtitles.subs[key][k].rating;
+                      id = k;
+                  }
+               } %>
+              <a href="<%= elements.subtitles.subs[key][id].url %>" class="flag-icon flag-icon-<%= key %>"></a>
+          </li>
+          <% }
+         }
+      }else { %>
+        <li value="noSubs"><h6 class="bold">No subtitles availables</h5></li>
+    <% } %>
     </ul>
   </div>
 
+<!-- Floating button back -->
+
+<div class="fixed-action-btn horizontal" style="top: 25px; left: 24px;">
+  <a class="btn-floating btn-large grey lighten-1">
+    <i class="large material-icons">keyboard_arrow_left</i>
+  </a>
+</div>
+
+
+<!-- Modal -->
+
+<!-- Modal overlay-->
+<div id="modalSuggestion" class="modal">
+  <div class="modal-content">
+    <h4>Suggestions</h4>
+    <div class="row">
+      <% if(suggestions.movies.length != 0) {
+        for(var l=0 ; l < suggestions.movies.length ; l++) {
+          var movie = suggestions.movies[l]; %>
+          <a href="/details?id=<%= suggestions.movies[l].id %>">
+            <div class="card col s12 m6 l3">
+               <div class="card-image waves-effect waves-block waves-light">
+                 <img class="activator" src="<%= movie.medium_cover_image %>">
+                 <span class="card-title"><%= movie.rating %></span>
+               </div>
+
+               <div class="card-content">
+                  <p><span class="truncate"><%= movie.title_long %></span></p>
+               </div>
+            </div>
+          </a>
+        <% }
+      } %>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Thanks for those suggestions</a>
+  </div>
+</div>
+
+<!-- Modal bottom -->
+
+<div id="modalCast" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Casting</h4>
+      <ul class="collection">
+        <% for(var n=0; n < elements.cast.length; n++) { %>
+          <li class="collection-item avatar">
+              <img src="<%= elements.cast[n].url_small_image %>" alt="" class="circle">
+              <span class="title"><%= elements.cast[n].character_name %></span>
+              <p>Incarned by : <%= elements.cast[n].name %></p>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+
+<!-- Dropdown -->
+
+<ul id='dropdownQualite' class='dropdown-content'>
+   <% for (var h=0 ; h < elements.torrents.length ; h++) { %>
+     <li>
+       <a href=" <%= elements.torrents[h].url %>"><%= elements.torrents[h].quality %></a>
+     </li>
+    <% } %>
+</ul>
+
+<!-- Content -->
 <div class="parallax-container" style="height: 350px;">
     <div class="parallax"><img src="<%= elements.background_image %>"></div>
 </div>
@@ -67,15 +146,15 @@
              <div class="col xs12 s6 m6 l6">
                  <div>
                      <label class="primaryColor"><%= elements.year %></label>
-                     <h5 class="uppercase title-6">Prologue</h5>
+                     <h5 title="Suggestions" class="uppercase title-6">Synopsis  <a class="modal-trigger" href="#modalSuggestion"><i class="tiny material-icons">launch</i></a></h5>
                  </div>
                  <div>
-                     <p><%= elements.description_full %></p>
+                   <p><%= elements.description_full %></p>
                  </div>
+
                  <div class="ca-btn">
-                   <% for (var h=0 ; h < elements.torrents.length ; h++) { %>
-                      <a class="btn grey waves-effect" href=" <%= elements.torrents[h].url %>"><%= elements.torrents[h].quality %></a>
-                   <% } %>
+                   <a class='dropdown-button btn grey' href='#' data-activates='dropdownQualite'>Quality<i class="material-icons right">arrow_drop_down</i></a>
+                   <a class="button btn grey modal-trigger" href="#modalCast">Casting</a>
                  </div>
              </div>
          </div>
